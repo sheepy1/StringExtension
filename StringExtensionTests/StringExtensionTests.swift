@@ -11,26 +11,46 @@ import XCTest
 
 class StringExtensionTests: XCTestCase {
     
+    let testStr = "01234567.Sheepy@大雪"
+    
+    var mutableStr = "我变胖了"
+    
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testGetCharacterByIndex() {
+        XCTAssert(testStr[3] == "3")
+        XCTAssert(testStr[9] == "S")
+        XCTAssert(testStr[15] == "@")
+        XCTAssert(testStr[16] == "大")
+        XCTAssert(testStr[17] == "雪")
+        XCTAssert(testStr[-1] == "雪")
+        XCTAssert(testStr[-2] == "大")
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
-        }
+    func testGetStringByRange() {
+        XCTAssert(testStr[0...3] == "0123")
+        XCTAssert(testStr[0..<3] == "012")
+        XCTAssert(testStr[8...16] == ".Sheepy@大")
+    }
+    
+    func testInsertCharacter() {
+        mutableStr.insert("也", atIndex: 1)
+        XCTAssert(mutableStr == "我也变胖了")
+    }
+    
+    func testRemoveByIndex() {
+        mutableStr.removeAtIndex(1)
+        XCTAssert(mutableStr == "我胖了")
+    }
+    
+    func testReverse() {
+        XCTAssert(testStr.reverse() == "雪大@ypeehS.76543210")
     }
     
 }
